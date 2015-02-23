@@ -1,0 +1,11 @@
+{
+  "name": "mithril-hx-components",
+  "url": "https://github.com/andywhite37/mithril-hx-components",
+  "license": "MIT",
+  "classPath": "src",
+  "tags": ["js", "mvc", "mithril"],
+  "description": "Various components for mithril-hx",
+  "releasenote": "",
+  "version": "0.0.1",
+  "contributors": ["andywhite37"]
+}

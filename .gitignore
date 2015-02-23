@@ -1,0 +1,8 @@
+.DS_Store
+*.sublime-*
+
+bin
+doc/pages
+doc/xml
+doc/dox
+examples/**/*.js

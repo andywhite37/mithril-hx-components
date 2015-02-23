@@ -1,0 +1,7 @@
+-lib mithril
+-lib utest
+-cp src
+-cp test
+-js bin/test.js
+-main TestAll
+-cmd node bin/test.js

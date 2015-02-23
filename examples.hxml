@@ -1,0 +1,5 @@
+-lib mithril
+-cp src
+-cp examples/src
+-js examples/app.js
+-main ExampleApp
