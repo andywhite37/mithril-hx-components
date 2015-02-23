@@ -5,7 +5,8 @@
 From the command line just type:
 
 ```bash
-haxelib install mithril-hx-components
+# Not published to haxelib (yet?)
+#haxelib install mithril-hx-components
 ```
 
 To use the `dev` version do:
