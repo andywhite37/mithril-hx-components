@@ -1,5 +1,6 @@
 package ;
 
+import js.Browser;
 import mithril.M;
 
 class ExampleApp {
@@ -11,7 +12,7 @@ class ExampleApp {
 
   public function start() {
     M.routeMode = "hash";
-    M.route(js.Browser.document.getElementById("root"), "/", {
+    M.route(Browser.document.getElementById("root"), "/", {
       "/": home
     });
   }
