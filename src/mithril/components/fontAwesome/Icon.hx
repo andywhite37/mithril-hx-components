@@ -1,6 +1,7 @@
-package mithril.components.bootstrap;
+package mithril.components.fontAwesome;
 
 import mithril.M;
+import mithril.components.Component;
 using StringTools;
 
 @:enum
@@ -60,7 +61,7 @@ abstract IconFlip(String) to String {
   var Vertical = ".fa-flip-vertical";
 }
 
-typedef IconOptions = {
+typedef IconOptions = { > ComponentOptions,
   type: String,
   ?size : IconSize,
   ?fixedWidth : IconFixedWidth,
@@ -69,10 +70,13 @@ typedef IconOptions = {
   ?border : IconBorder,
   ?pull : IconPull,
   ?rotate : IconRotate,
-  ?flip : IconFlip
+  ?flip : IconFlip,
+  ?loadingType : String,
+  ?loadingSpin : IconSpin,
+  ?isLoading : Bool
 };
 
-class Icon extends El {
+class Icon extends Component {
   @prop public var type : String;
   @prop public var size : IconSize;
   @prop public var fixedWidth : IconFixedWidth;
@@ -82,10 +86,11 @@ class Icon extends El {
   @prop public var pull : IconPull;
   @prop public var rotate : IconRotate;
   @prop public var flip : IconFlip;
+  @prop public var loadingType : String;
+  @prop public var loadingSpin : IconSpin;
+  @prop public var isLoading : Bool;
 
-  public function new(options : IconOptions, ?attributes : Dynamic) {
-    super("", attributes);
-
+  public function new(options : IconOptions) {
     if (!options.type.startsWith(".fa-")) throw new js.Error("Icon options.type must start with .fa- prefix");
 
     this.type = M.prop(options.type);
@@ -97,9 +102,33 @@ class Icon extends El {
     this.pull = M.prop(IconPull.Default);
     this.rotate = M.prop(IconRotate.Default);
     this.flip = M.prop(IconFlip.Default);
+    this.loadingType = M.prop(".fa-refresh");
+    this.loadingSpin = M.prop(IconSpin.Spin);
+    this.isLoading = M.prop(false);
+
+    if (options.size != null) this.size(options.size);
+    if (options.fixedWidth != null) this.fixedWidth(options.fixedWidth);
+    if (options.spin != null) this.spin(options.spin);
+    if (options.listItem != null) this.listItem(options.listItem);
+    if (options.border != null) this.border(options.border);
+    if (options.pull != null) this.pull(options.pull);
+    if (options.rotate != null) this.rotate(options.rotate);
+    if (options.flip != null) this.flip(options.flip);
+    if (options.loadingType != null) this.loadingType(options.loadingType);
+    if (options.loadingSpin != null) this.loadingSpin(options.loadingSpin);
+    if (options.isLoading != null) this.isLoading(options.isLoading);
+
+    super(options);
   }
 
-  public override function refreshSelector() {
-    selector('.fa${type()}${size()}${fixedWidth()}${spin()}${listItem()}${border()}${pull()}${rotate()}${flip()}');
+  public override function getSelector() {
+    var activeType = isLoading() ? loadingType() : type();
+    var activeSpin = isLoading() ? loadingSpin() : spin();
+    return 'i.fa${activeType}${size()}${fixedWidth()}${activeSpin}${listItem()}${border()}${pull()}${rotate()}${flip()}';
+  }
+
+  public override function validateOptions(?options) {
+    super.validateOptions(options);
+    shouldHaveNoSelector(options);
   }
 }

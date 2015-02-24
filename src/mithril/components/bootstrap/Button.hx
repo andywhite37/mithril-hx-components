@@ -1,6 +1,7 @@
 package mithril.components.bootstrap;
 
 import mithril.M;
+import mithril.components.Component;
 import js.html.MouseEvent;
 
 @:enum
@@ -38,22 +39,20 @@ abstract ButtonBlockLevel(String) to String {
   var BlockLevel = ".btn-block";
 }
 
-typedef ButtonOptions = {
+typedef ButtonOptions = { > ComponentOptions,
   ?type : ButtonType,
   ?color : ButtonColor,
   ?size : ButtonSize,
   ?blockLevel : ButtonBlockLevel,
 };
 
-class Button extends El {
+class Button extends Component {
   @prop public var type : ButtonType;
   @prop public var color : ButtonColor;
   @prop public var size : ButtonSize;
   @prop public var blockLevel : ButtonBlockLevel;
 
-  public function new(?options : ButtonOptions, ?attributes : Dynamic, ?content : Module<Dynamic>) {
-    super("", attributes, content);
-
+  public function new(?options : ButtonOptions) {
     this.type = M.prop(ButtonType.Default);
     this.color = M.prop(ButtonColor.Default);
     this.size = M.prop(ButtonSize.Default);
@@ -65,9 +64,16 @@ class Button extends El {
       if (options.size != null) this.size(options.size);
       if (options.blockLevel != null) this.blockLevel(options.blockLevel);
     }
+
+    super(options);
   }
 
-  public override function refreshSelector() {
-    selector('${type()}.btn${color()}${size()}${blockLevel()}');
+  public override function validateOptions(?options) {
+    super.validateOptions(options);
+    shouldHaveNoSelector(options);
+  }
+
+  public override function getSelector() {
+    return '${type()}.btn${color()}${size()}${blockLevel()}';
   }
 }
