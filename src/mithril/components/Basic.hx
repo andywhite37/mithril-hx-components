@@ -1,18 +1,19 @@
 package mithril.components;
 
+import haxe.ds.Either;
 import mithril.M;
 
 class Basic implements Module<Basic> {
-  @prop public var value : M.BasicType;
+  public var content : GetterSetter<BasicType>;
 
-  public function new(value) {
-    this.value = M.prop(value);
+  public function new(content) {
+    this.content = content;
   }
 
   public function controller() {
   }
 
   public function view() {
-    return value();
+    return content();
   }
 }

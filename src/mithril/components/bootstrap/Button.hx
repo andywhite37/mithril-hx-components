@@ -39,52 +39,35 @@ abstract ButtonBlockLevel(String) to String {
 }
 
 typedef ButtonOptions = {
-  content : Module<Dynamic>,
-  ?onClick : MouseEvent -> Void,
   ?type : ButtonType,
   ?color : ButtonColor,
   ?size : ButtonSize,
   ?blockLevel : ButtonBlockLevel,
-  ?isDisabled: Bool
 };
 
-class Button implements Module<Button> {
-  @prop var content : Module<Dynamic>;
-  @prop var type : ButtonType;
-  @prop var color : ButtonColor;
-  @prop var size : ButtonSize;
-  @prop var blockLevel : ButtonBlockLevel;
-  @prop var isDisabled : Bool;
-  @prop var onClick : MouseEvent -> Void;
+class Button extends El {
+  @prop public var type : ButtonType;
+  @prop public var color : ButtonColor;
+  @prop public var size : ButtonSize;
+  @prop public var blockLevel : ButtonBlockLevel;
 
-  public function new(options : ButtonOptions) {
-    content = M.prop(options.content);
-    type = M.prop(ButtonType.Default);
-    color = M.prop(ButtonColor.Default);
-    size = M.prop(ButtonSize.Default);
-    blockLevel = M.prop(ButtonBlockLevel.Default);
-    isDisabled = M.prop(false);
-    onClick = M.prop(function(e : MouseEvent) { });
+  public function new(?options : ButtonOptions, ?attributes : Dynamic, ?content : Module<Dynamic>) {
+    super("", attributes, content);
+
+    this.type = M.prop(ButtonType.Default);
+    this.color = M.prop(ButtonColor.Default);
+    this.size = M.prop(ButtonSize.Default);
+    this.blockLevel = M.prop(ButtonBlockLevel.Default);
 
     if (options != null) {
-      if (options.type != null) type(options.type);
-      if (options.color != null) color(options.color);
-      if (options.size != null) size(options.size);
-      if (options.blockLevel != null) blockLevel(options.blockLevel);
-      if (options.isDisabled != null) isDisabled(options.isDisabled);
-      if (options.onClick != null) this.onClick(options.onClick);
+      if (options.type != null) this.type(options.type);
+      if (options.color != null) this.color(options.color);
+      if (options.size != null) this.size(options.size);
+      if (options.blockLevel != null) this.blockLevel(options.blockLevel);
     }
   }
 
-  public function controller() {
-    content().controller();
-  }
-
-  public function view() {
-    var selector = '${type()}.btn${color()}${size()}${blockLevel()}';
-    var attributes = {
-      onclick: onClick()
-    };
-    return m(selector, attributes, content().view());
+  public override function refreshSelector() {
+    selector('${type()}.btn${color()}${size()}${blockLevel()}');
   }
 }
