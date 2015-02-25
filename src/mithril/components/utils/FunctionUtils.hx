@@ -1,5 +1,8 @@
 package mithril.components.utils;
 
+import mithril.components.utils.Typedefs;
+
+
 /**
  * Function utilities
  */
@@ -11,5 +14,13 @@ class FunctionUtils {
     return function() : T {
       return value;
     }
+  }
+
+  public static function a(?value) : AttrsFunc {
+    return f(value);
+  }
+
+  public static function c(?value) : ChildrenFunc {
+    return f(value);
   }
 }

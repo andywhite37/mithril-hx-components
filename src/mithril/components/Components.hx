@@ -1,6 +1,7 @@
 package mithril.components;
 
 import mithril.M;
+import mithril.components.utils.Typedefs;
 using Lambda;
 
 /**
@@ -8,26 +9,21 @@ using Lambda;
  * (with no container element)
  */
 class Components implements Module<Components> {
-  var contents : Array<Module<Dynamic>>;
+  var modules : Mods;
 
-  public function new(contents : Array<Module<Dynamic>>) {
-    trace(contents);
-    this.contents = contents;
+  public function new(modules : Mods) {
+    this.modules = modules;
   }
 
   public function controller() {
-    if (contents == null) {
-      trace("here");
-      trace(contents);
-    }
-    contents.iter(function(content) {
-      content.controller();
+    modules.iter(function(module) {
+      module.controller();
     });
   }
 
   public function view() {
-    return contents.map(function(content) {
-      return content.view();
+    return modules.map(function(module) {
+      return module.view();
     });
   }
 }

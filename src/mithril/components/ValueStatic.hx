@@ -1,6 +1,7 @@
 package mithril.components;
 
 import mithril.M;
+import mithril.components.utils.Typedefs;
 
 /**
  * Component primitive which renders a static BasicType value.
@@ -8,9 +9,9 @@ import mithril.M;
  * redraw to redraw.
  */
 class ValueStatic extends ValueBound {
-  public static var nil(default, null) : Module<Dynamic> = new ValueStatic(null);
-  public static var empty(default, null) : Module<Dynamic> = new ValueStatic("");
-  public static var nbsp(default, null) : Module<Dynamic> = new ValueStatic(M.trust("&nbsp;"));
+  public static var nil(default, null) : Mod = new ValueStatic(null);
+  public static var empty(default, null) : Mod = new ValueStatic("");
+  public static var nbsp(default, null) : Mod = new ValueStatic(M.trust("&nbsp;"));
 
   public function new(?content : BasicType) {
     super(M.prop(content));

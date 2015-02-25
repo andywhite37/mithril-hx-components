@@ -4,20 +4,18 @@ import js.Browser;
 import mithril.M;
 
 class ExampleApp {
-  var homeModule : HomeModule;
-
   public function new() {
-    homeModule = new HomeModule();
-  }
+    M.module(Browser.document.getElementById("nav"), new NavModule());
 
-  public function start() {
     M.routeMode = "hash";
     M.route(Browser.document.getElementById("root"), "/", {
-      "/": homeModule
+      "/" : new HomeModule(),
+      "/test" : new TestModule(),
+      "/todo" : new TodoModule()
     });
   }
 
   public static function main() {
-    new ExampleApp().start();
+    new ExampleApp();
   }
 }

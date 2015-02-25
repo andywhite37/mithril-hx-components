@@ -4,6 +4,7 @@ import mithril.M;
 import mithril.components.Component;
 using StringTools;
 
+/*
 @:enum
 abstract IconSize(String) to String {
   var Default = "";
@@ -61,7 +62,7 @@ abstract IconFlip(String) to String {
   var Vertical = ".fa-flip-vertical";
 }
 
-typedef IconOptions = { > ComponentOptions,
+typedef IconOptions = {
   type: String,
   ?size : IconSize,
   ?fixedWidth : IconFixedWidth,
@@ -132,3 +133,4 @@ class Icon extends Component {
     shouldHaveNoSelector(options);
   }
 }
+*/

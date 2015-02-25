@@ -4,6 +4,7 @@ import js.html.MouseEvent;
 import mithril.M;
 import mithril.components.Component;
 
+/*
 @:enum
 abstract ButtonType(String) to String {
   var Default = "button[type='button']";
@@ -39,7 +40,7 @@ abstract ButtonBlockLevel(String) to String {
   var BlockLevel = ".btn-block";
 }
 
-typedef ButtonOptions = { > ComponentOptions,
+typedef ButtonOptions = {
   ?type : ButtonType,
   ?color : ButtonColor,
   ?size : ButtonSize,
@@ -77,3 +78,4 @@ class Button extends Component {
     return '${type()}.btn${color()}${size()}${blockLevel()}';
   }
 }
+*/

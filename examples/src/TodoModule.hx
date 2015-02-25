@@ -2,7 +2,7 @@ package ;
 
 import mithril.M;
 
-class HomeModule implements Module<HomeModule> {
+class TodoModule implements Module<TodoModule> {
   public function new() {
   }
 
@@ -10,6 +10,6 @@ class HomeModule implements Module<HomeModule> {
   }
 
   public function view() {
-    m("h1", "Welcome to the example app!");
+    m("h1", "TODO");
   }
 }
