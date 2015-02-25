@@ -1,8 +1,8 @@
 package mithril.components.bootstrap;
 
+import js.html.MouseEvent;
 import mithril.M;
 import mithril.components.Component;
-import js.html.MouseEvent;
 
 @:enum
 abstract ButtonType(String) to String {

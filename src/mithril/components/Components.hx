@@ -4,25 +4,30 @@ import mithril.M;
 using Lambda;
 
 /**
- * Component primitive which renders an array of child components
+ * Module which renders an array of child modules.
  * (with no container element)
  */
 class Components implements Module<Components> {
-  var content : Array<Module<Dynamic>>;
+  var contents : Array<Module<Dynamic>>;
 
-  public function new(content : Array<Module<Dynamic>>) {
-    this.content = content;
+  public function new(contents : Array<Module<Dynamic>>) {
+    trace(contents);
+    this.contents = contents;
   }
 
   public function controller() {
-    content.iter(function(item) {
-      item.controller();
+    if (contents == null) {
+      trace("here");
+      trace(contents);
+    }
+    contents.iter(function(content) {
+      content.controller();
     });
   }
 
   public function view() {
-    return content.map(function(item) {
-      return item.view();
+    return contents.map(function(content) {
+      return content.view();
     });
   }
 }

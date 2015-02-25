@@ -57,29 +57,29 @@ class HomeModule implements Module<HomeModule> {
     var viewModel = new HomeViewModel();
 
     var button1 = bsButton({
-      af: function() return {
+      attributes: {
         onclick: viewModel.onButton1Click
       },
-      c: comps([
+      children: [
         bound(viewModel.button1Text),
         stat(" "),
         stat(viewModel.button1ClickCount()), // Model initial value (does not change after first render)
         stat(" "),
         bound(viewModel.button1ClickCount) // Model bound value (updates with each click)
-      ])
+      ]
     });
 
     var input1 = inputText({
-      af: function() return {
+      getAttributes: function() return {
         value: viewModel.input1Value(),
         onkeyup: M.withAttr("value", viewModel.input1Value)
       }
     });
 
-    var input1Output = span({ c: bound(viewModel.input1Value) });
+    var input1Output = span(viewModel.input1Value);
 
     var checkbox1 = inputCheckbox({
-      af: function() return {
+      getAttributes: function() return {
         id: "checkbox-1",
         checked: viewModel.checkbox1Value(),
         onchange: M.withAttr("checked", viewModel.checkbox1Value)
@@ -87,34 +87,34 @@ class HomeModule implements Module<HomeModule> {
     });
 
     var checkbox1Label = label({
-      a: {
+      attributes: {
         "for": "checkbox-1"
       },
-      c: stat("Checkbox label")
+      child: stat("Checkbox label")
     });
 
     var checkbox1Output = div(viewModel.checkbox1Value);
 
     var submitButton = bsButton({
       color: ButtonColor.Danger,
-      af: function() return {
+      getAttributes: function() return {
         type: "submit",
         disabled: viewModel.isLoading()
       },
-      cf: function() return comps([
+      getChildren: function() return [
         faIcon({
           type: ".fa-chevron-right",
           isLoading: viewModel.isLoading()
         }),
         stat(" Submit"),
-      ])
+      ]
     });
 
     var form = form({
-      a: {
+      attributes: {
         onsubmit: viewModel.onFormSubmit
       },
-      c: comps([
+      children: [
         input1,
         nbsp(6),
         input1Output,
@@ -124,43 +124,34 @@ class HomeModule implements Module<HomeModule> {
         checkbox1Output,
         br(),
         submitButton
-      ])
+      ]
     });
 
     var formOutput = pre(viewModel.formOutput);
 
-    var orderedList = ol({
-      content: comps([
-        li("Item 1"),
-        li("Item 2"),
-        li({
-          content: comps([
-            span("Button 1 Click Count: "),
-            span(viewModel.button1ClickCount)
+    var orderedList = ol([
+      li("Item 1"),
+      li("Item 2"),
+      li([
+        span("Button 1 Click Count: "),
+        span(viewModel.button1ClickCount),
+        div([
+          h1("Test")
+        ])
+      ]),
+      li(faIcon({ type: ".fa-twitter" })),
+      li([
+        span("test"),
+        ul([
+          li("nested 1"),
+          li("nested 2"),
+          li([
+            span("is loading: "),
+            span(viewModel.isLoading),
           ])
-        }),
-        li({
-          content: faIcon({ type: ".fa-twitter" })
-        }),
-        li({
-          content: comps([
-            span("test"),
-            ul({
-              content: comps([
-                li("nested 1"),
-                li("nested 2"),
-                li({
-                  content: comps([
-                    span("is loading: "),
-                    span(viewModel.isLoading),
-                  ])
-                })
-              ])
-            })
-          ])
-        })
+        ])
       ])
-    });
+    ]);
 
     modules = [
       h1("Demo button"),
@@ -185,6 +176,7 @@ class HomeModule implements Module<HomeModule> {
 
   public function controller() {
     modules.iter(function(module) {
+      trace("module", module.view());
       module.controller();
     });
   }
