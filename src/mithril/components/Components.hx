@@ -1,29 +1,33 @@
 package mithril.components;
 
 import mithril.M;
-import mithril.components.utils.Typedefs;
 using Lambda;
 
 /**
  * Module which renders an array of child modules.
  * (with no container element)
  */
-class Components implements Module<Components> {
-  var modules : Mods;
+class Components implements IComponent {
+  var components : Array<IComponent>;
 
-  public function new(modules : Mods) {
-    this.modules = modules;
+  @:from
+  public static function fromArrayComponents(components : Array<IComponent>) {
+    return new Components(components);
+  }
+
+  public function new(components : Array<IComponent>) {
+    this.components = components;
   }
 
   public function controller() {
-    modules.iter(function(module) {
-      module.controller();
+    components.iter(function(component) {
+      component.controller();
     });
   }
 
   public function view() {
-    return modules.map(function(module) {
-      return module.view();
+    return components.map(function(component) {
+      return component.view();
     });
   }
 }

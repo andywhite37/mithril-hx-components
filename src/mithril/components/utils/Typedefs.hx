@@ -2,12 +2,12 @@ package mithril.components.utils;
 
 import mithril.M;
 
-typedef Mod = Module<Dynamic>;
-typedef Mods = Array<Module<Dynamic>>;
-typedef Attrs = Dynamic;
+//typedef Mod = Module<Dynamic>;
+//typedef Mods = Array<Module<Dynamic>>;
+//typedef Attrs = Dynamic;
 
-typedef AttrsFunc = Void -> Attrs;
-typedef ChildrenFunc = Void -> Children;
+//typedef AttrsFunc = Void -> Attrs;
+//typedef ChildrenFunc = Void -> Children;
 
 //typedef StrOrFunc = ValOrFunc<String>;
 //typedef DynOrFunc = ValOrFunc<Dynamic>;

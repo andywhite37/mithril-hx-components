@@ -3,7 +3,7 @@ package ;
 import haxe.Json;
 import haxe.Timer;
 import mithril.M;
-import mithril.components.ComponentFactory.*; // Import all static factory functions
+//import mithril.components.ComponentFactory.*; // Import all static factory functions
 import mithril.components.bootstrap.BootstrapFactory.*; // Import all static factory functions
 import mithril.components.bootstrap.Button;
 import mithril.components.fontAwesome.FontAwesomeFactory.*; // Import all static factory functions

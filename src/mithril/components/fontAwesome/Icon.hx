@@ -1,7 +1,7 @@
 package mithril.components.fontAwesome;
 
 import mithril.M;
-import mithril.components.Component;
+//import mithril.components.Component;
 using StringTools;
 
 /*

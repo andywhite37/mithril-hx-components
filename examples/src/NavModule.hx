@@ -2,9 +2,6 @@ package ;
 
 import js.Browser;
 import mithril.M;
-import mithril.components.ComponentFactory.*;
-import mithril.components.utils.FunctionUtils.*;
-import mithril.components.utils.Typedefs;
 using Lambda;
 
 class NavModule implements Module<NavModule> {
@@ -14,9 +11,8 @@ class NavModule implements Module<NavModule> {
     { title: "TODO", route: "/todo", isActive: false },
   ];
 
-  var module : Module<Dynamic>;
-
   public function new() {
+    /*
     module = div(".navbar.navbar-default.navbar-fixed-top", c([
       div(".container", c([
         div(".navbar-header", c([
@@ -39,10 +35,11 @@ class NavModule implements Module<NavModule> {
         ]))
       ]))
     ]));
+    */
   }
 
   public function controller() {
-    module.controller();
+    //module.controller();
   }
 
   public function view() {
@@ -50,6 +47,7 @@ class NavModule implements Module<NavModule> {
       link.isActive = link.route == M.route();
     });
 
-    return module.view();
+    //return module.view();
+    return m("nav", "Nav");
   }
 }

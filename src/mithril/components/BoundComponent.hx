@@ -9,17 +9,22 @@ import mithril.M;
  * GetterSetter<BasicType>, so it will render the current value of
  * the GetterSetter value with each redraw.
  */
-class ValueBound implements Module<ValueBound> {
-  public var content : GetterSetter<BasicType>;
+class BoundComponent implements IComponent {
+  public var getterSetter : GetterSetter<BasicType>;
 
-  public function new(content) {
-    this.content = content;
+  @:from
+  public static function fromGetterSetter(getterSetter : GetterSetter<BasicType>) {
+    return new BoundComponent(getterSetter);
+  }
+
+  public function new(getterSetter) {
+    this.getterSetter = getterSetter;
   }
 
   public function controller() {
   }
 
   public function view() {
-    return content();
+    return getterSetter();
   }
 }

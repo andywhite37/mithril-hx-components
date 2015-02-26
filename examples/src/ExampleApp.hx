@@ -8,10 +8,11 @@ class ExampleApp {
     M.module(Browser.document.getElementById("nav"), new NavModule());
 
     M.routeMode = "hash";
+
     M.route(Browser.document.getElementById("root"), "/", {
-      "/" : new HomeModule(),
-      "/test" : new TestModule(),
-      "/todo" : new TodoModule()
+      "/" : new HomeModule()
+      //"/test" : new TestModule(),
+      //"/todo" : new TodoModule()
     });
   }
 
