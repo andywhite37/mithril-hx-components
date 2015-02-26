@@ -7,7 +7,7 @@ using Lambda;
  * Module which renders an array of child modules.
  * (with no container element)
  */
-class Components implements IComponent {
+class Components extends ComponentBase {
   var components : Array<IComponent>;
 
   @:from
@@ -16,16 +16,17 @@ class Components implements IComponent {
   }
 
   public function new(components : Array<IComponent>) {
+    super();
     this.components = components;
   }
 
-  public function controller() {
+  public override function controller() {
     components.iter(function(component) {
       component.controller();
     });
   }
 
-  public function view() {
+  public override function view(?ctrl) : ViewOutput {
     return components.map(function(component) {
       return component.view();
     });

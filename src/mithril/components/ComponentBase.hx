@@ -5,9 +5,10 @@ class ComponentBase implements IComponent {
   }
 
   public function controller() {
+    // No-op in base class
   }
 
   public function view() {
-    return m("No implemented");
+    return m("Not implemented");
   }
 }

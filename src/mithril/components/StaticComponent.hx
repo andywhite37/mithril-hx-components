@@ -12,11 +12,6 @@ class StaticComponent extends BoundComponent {
   public static var empty(default, null) : IComponent = new StaticComponent("");
   public static var nbsp(default, null) : IComponent = new StaticComponent(M.trust("&nbsp;"));
 
-  @:from
-  public static function fromBasicType(value : BasicType) {
-    return new StaticComponent(value);
-  }
-
   public function new(?staticValue : BasicType) {
     super(M.prop(staticValue));
   }
